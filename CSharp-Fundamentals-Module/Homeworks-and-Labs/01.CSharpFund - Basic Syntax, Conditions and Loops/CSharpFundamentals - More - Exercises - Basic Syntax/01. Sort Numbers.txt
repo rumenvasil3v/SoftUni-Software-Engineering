@@ -1,0 +1,105 @@
+double firstNum = double.Parse(Console.ReadLine());
+            double secondNum = double.Parse(Console.ReadLine());
+            double thirdNum = double.Parse(Console.ReadLine());
+
+            double maximum = 0;
+            double middle = 0;
+            double minimum = 0;
+
+            if (firstNum > secondNum || firstNum > thirdNum)
+            {
+                if (firstNum > secondNum && firstNum > thirdNum)
+                {
+                    maximum = firstNum;
+                }
+                if (secondNum > thirdNum)
+                {
+                    middle = secondNum;
+                    minimum = thirdNum;
+                    maximum= firstNum;
+                }
+                if (secondNum > firstNum)
+                {
+                    maximum= secondNum;
+                    middle = firstNum;
+                    minimum = thirdNum;
+                }
+                if (thirdNum > secondNum)
+                {
+                    middle = thirdNum;
+                    minimum = secondNum;
+                    maximum= firstNum;
+                }
+                if (firstNum < thirdNum)
+                {
+                    maximum = thirdNum;
+                    middle = firstNum;
+                    minimum = secondNum;
+                }
+
+            }
+            else if (secondNum > firstNum || secondNum > thirdNum)
+            {
+                if (secondNum > thirdNum && secondNum > firstNum)
+                {
+                    maximum = secondNum;
+                }
+                if (thirdNum > firstNum)
+                {
+                    minimum = firstNum;
+                    middle = thirdNum;
+                    maximum = secondNum;
+                }
+                if (thirdNum > secondNum)
+                {
+                    maximum = thirdNum;
+                    middle = secondNum;
+                    minimum = thirdNum;
+                }
+                if (firstNum > thirdNum)
+                {
+                    middle = firstNum;
+                    minimum = thirdNum;
+                    maximum = secondNum;
+                }
+                if (secondNum < thirdNum)
+                {
+                    maximum = thirdNum;
+                    middle = secondNum;
+                    minimum = firstNum;
+                }
+            }
+            else if (thirdNum > secondNum || thirdNum > firstNum)
+            {
+                if (thirdNum > firstNum && thirdNum > secondNum)
+                {
+                    maximum = thirdNum;
+                }
+                if (firstNum > secondNum)
+                {
+                    minimum = secondNum;
+                    middle = firstNum;
+                    maximum = thirdNum;
+                }
+                if (firstNum > thirdNum)
+                {
+                    maximum = firstNum;
+                    middle = thirdNum;
+                    minimum = secondNum;
+                }
+                if (secondNum > firstNum)
+                {
+                    middle = secondNum;
+                    minimum = firstNum;
+                    maximum = thirdNum;
+                }
+                if (thirdNum < firstNum)
+                {
+                    maximum = firstNum;
+                    middle = thirdNum;
+                    minimum = secondNum;
+                }
+            }
+            Console.WriteLine(maximum);
+            Console.WriteLine(middle);
+            Console.WriteLine(minimum);
