@@ -1,1 +1,7 @@
 Creating with TortoiseGit!
+
+The change was made successfully!
+
+I'm happy to hear that!
+
+Would you like something else?
