@@ -1,3 +1,0 @@
-Creating with TortoiseGit!
-
-The change was made successfully!
