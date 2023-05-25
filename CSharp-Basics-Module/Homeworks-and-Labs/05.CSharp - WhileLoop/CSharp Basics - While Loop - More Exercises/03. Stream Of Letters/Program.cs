@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Xml;
 
 namespace _03._Stream_Of_Letters
 {
@@ -10,73 +8,106 @@ namespace _03._Stream_Of_Letters
         {
 
             string input = Console.ReadLine();
+            bool isValid = char.TryParse(input, out char something);
 
             string word = string.Empty;
+            string words = string.Empty;
 
-            int meetedC = 0;
-            int meetedO = 0;
-            int meetedN = 0;
+            bool meetedC = false;
+            bool meetedO = false;
+            bool meetedN = false;
 
             while (input != "End")
             {
-                if (meetedC == 1 && input == "c")
+                if (isValid)
                 {
-                    word += input;
-                    meetedC++;
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (meetedN == 1 && input == "n")
-                {
-                    word += input;
-                    meetedN++;
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (meetedO == 1 && input == "o")
-                {
-                    word += input;
-                    meetedO++;
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (input == "c")
-                {
-                    meetedC++;
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (input == "o")
-                {
-                    meetedO++;
-                    input = Console.ReadLine();
-                    continue;
-                }
-                else if (input == "n")
-                {
-                    meetedN++;
-                    input = Console.ReadLine();
-                    continue;
-                }
+                    if ( something >= 65 && something <= 90 || something >= 97 && something <= 122)
+                    {
+                        if (meetedC && something == 'c')
+                        {
+                            word += something;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
+                        else if (meetedN && something == 'n')
+                        {
+                            word += something;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
+                        else if (meetedO && something == 'o')
+                        {
+                            word += something;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
+                        else if (something == 'c' && !meetedC)
+                        {
+                            meetedC = true;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
+                        else if (something == 'o' && !meetedO)
+                        {
+                            meetedO = true;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
+                        else if (something == 'n' && !meetedN)
+                        {
+                            meetedN = true;
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+                            continue;
+                        }
 
-                
-                if (meetedC > 0 && meetedN > 0 && meetedO > 0)
-                {
-                    Console.WriteLine($"{word} ");
-                    word = string.Empty;
-                    input = Console.ReadLine();
-                    meetedO = 0;
-                    meetedC = 0;
-                    meetedN = 0;
-                    continue;
+
+                        if (meetedN && meetedC && meetedO)
+                        {
+                            words += word + " ";
+
+                            word = string.Empty;
+                            word += something;
+
+                            meetedN = false;
+                            meetedC = false;
+                            meetedO = false;
+
+                            input = Console.ReadLine();
+                            isValid = char.TryParse(input, out something);
+
+                            continue;
+                        }
+
+                        word += something;
+
+                        input = Console.ReadLine();
+                        isValid = char.TryParse(input, out something);
+                    }
+                    else
+                    {
+                        input = Console.ReadLine();
+                        isValid = char.TryParse(input, out something);
+                    }
                 }
-
-                word += input;
-
-                input = Console.ReadLine();
+                else
+                {
+                    input = Console.ReadLine();
+                    isValid = char.TryParse(input, out something);
+                }
             }
 
-            Console.WriteLine($"{word}");
+            if (meetedN && meetedC && meetedO)
+            {
+                words += word + " ";
+            }
+
+            Console.WriteLine(words);
         }
     }
 }
