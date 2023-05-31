@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Sign of Integer Numbers", "01. Sign of Integer Numbers\01. Sign of Integer Numbers.csproj", "{95C11DF7-0950-4DE4-B1A4-16229E67049B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "demo\demo.csproj", "{EB3B720C-1928-4FBD-849A-940E671E7F27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95C11DF7-0950-4DE4-B1A4-16229E67049B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C11DF7-0950-4DE4-B1A4-16229E67049B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C11DF7-0950-4DE4-B1A4-16229E67049B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C11DF7-0950-4DE4-B1A4-16229E67049B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81B05026-7D87-45F9-9F22-D72A5086A7BE}
+	EndGlobalSection
+EndGlobal
