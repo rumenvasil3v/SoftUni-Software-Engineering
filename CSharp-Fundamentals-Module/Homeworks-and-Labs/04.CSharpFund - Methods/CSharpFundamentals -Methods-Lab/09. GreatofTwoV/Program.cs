@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace demo
+namespace _09._GreatofTwoV
 {
     internal class Program
     {
-
         static void Main(string[] args)
         {
             string dataType = Console.ReadLine();
@@ -65,20 +66,7 @@ namespace demo
         static string GetMax(string firstString, string secondString)
         {
             string biggestString = string.Empty;
-            int firstStringSum = 0;
-            int secondStringSum = 0;
-
-            for (int i = 0; i < firstString.Length; i++)
-            {
-                firstStringSum += firstString[i];
-            }
-
-            for (int i = 0; i < secondString.Length; i++)
-            {
-                secondStringSum += secondString[i];
-            }
-
-            if (firstStringSum >= secondStringSum)
+            if (firstString.CompareTo(secondString) > 0)
             {
                 biggestString = firstString;
             }
@@ -86,7 +74,6 @@ namespace demo
             {
                 biggestString = secondString;
             }
-
             return biggestString;
         }
     }

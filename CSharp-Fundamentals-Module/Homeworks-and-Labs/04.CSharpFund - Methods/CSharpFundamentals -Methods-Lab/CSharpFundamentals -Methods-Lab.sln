@@ -3,9 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Sign of Integer Numbers", "01. Sign of Integer Numbers\01. Sign of Integer Numbers.csproj", "{95C11DF7-0950-4DE4-B1A4-16229E67049B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. Sign of Integer Numbers", "01. Sign of Integer Numbers\01. Sign of Integer Numbers.csproj", "{95C11DF7-0950-4DE4-B1A4-16229E67049B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo", "demo\demo.csproj", "{EB3B720C-1928-4FBD-849A-940E671E7F27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demo", "demo\demo.csproj", "{EB3B720C-1928-4FBD-849A-940E671E7F27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Grades", "02. Grades\02. Grades.csproj", "{4E89E637-F606-4FD5-84CD-C5D9E63126EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Calculations", "03.Calculations\03.Calculations.csproj", "{A7958ECD-7E30-498C-89B7-A93C570DBA40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.PrintTriangl", "04.PrintTriangl\04.PrintTriangl.csproj", "{97FAB7A4-5768-468F-AF94-855F23B3A38B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05. Orders", "05. Orders\05. Orders.csproj", "{A4EECC51-F5CD-4B52-8C51-A50D57CB1763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.Rect Area", "06.Rect Area\06.Rect Area.csproj", "{6F99B953-1C4A-4187-A381-E316FD2016F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07. RepeatStr", "07. RepeatStr\07. RepeatStr.csproj", "{EE0C898F-AA78-4116-B582-E04E9698FAF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08. Math Power", "08. Math Power\08. Math Power.csproj", "{BB99706A-6836-4EEC-84BE-4270C3565D2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09. GreatofTwoV", "09. GreatofTwoV\09. GreatofTwoV.csproj", "{019F3745-563C-4817-96D6-5698DE53A18C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10.MultiEvenOdd", "10.MultiEvenOdd\10.MultiEvenOdd.csproj", "{C3C27D7E-417B-4CC1-9EA2-59B2089EEC9A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11.MathOperat", "11.MathOperat\11.MathOperat.csproj", "{43035823-0D1C-4EAF-A283-6D93D52E34CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +41,46 @@ Global
 		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB3B720C-1928-4FBD-849A-940E671E7F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E89E637-F606-4FD5-84CD-C5D9E63126EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E89E637-F606-4FD5-84CD-C5D9E63126EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E89E637-F606-4FD5-84CD-C5D9E63126EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E89E637-F606-4FD5-84CD-C5D9E63126EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7958ECD-7E30-498C-89B7-A93C570DBA40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7958ECD-7E30-498C-89B7-A93C570DBA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7958ECD-7E30-498C-89B7-A93C570DBA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7958ECD-7E30-498C-89B7-A93C570DBA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FAB7A4-5768-468F-AF94-855F23B3A38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FAB7A4-5768-468F-AF94-855F23B3A38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FAB7A4-5768-468F-AF94-855F23B3A38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FAB7A4-5768-468F-AF94-855F23B3A38B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4EECC51-F5CD-4B52-8C51-A50D57CB1763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4EECC51-F5CD-4B52-8C51-A50D57CB1763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4EECC51-F5CD-4B52-8C51-A50D57CB1763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4EECC51-F5CD-4B52-8C51-A50D57CB1763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F99B953-1C4A-4187-A381-E316FD2016F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F99B953-1C4A-4187-A381-E316FD2016F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F99B953-1C4A-4187-A381-E316FD2016F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F99B953-1C4A-4187-A381-E316FD2016F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE0C898F-AA78-4116-B582-E04E9698FAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE0C898F-AA78-4116-B582-E04E9698FAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE0C898F-AA78-4116-B582-E04E9698FAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE0C898F-AA78-4116-B582-E04E9698FAF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB99706A-6836-4EEC-84BE-4270C3565D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB99706A-6836-4EEC-84BE-4270C3565D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB99706A-6836-4EEC-84BE-4270C3565D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB99706A-6836-4EEC-84BE-4270C3565D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019F3745-563C-4817-96D6-5698DE53A18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019F3745-563C-4817-96D6-5698DE53A18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019F3745-563C-4817-96D6-5698DE53A18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019F3745-563C-4817-96D6-5698DE53A18C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C27D7E-417B-4CC1-9EA2-59B2089EEC9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C27D7E-417B-4CC1-9EA2-59B2089EEC9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C27D7E-417B-4CC1-9EA2-59B2089EEC9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C27D7E-417B-4CC1-9EA2-59B2089EEC9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43035823-0D1C-4EAF-A283-6D93D52E34CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43035823-0D1C-4EAF-A283-6D93D52E34CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43035823-0D1C-4EAF-A283-6D93D52E34CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43035823-0D1C-4EAF-A283-6D93D52E34CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
