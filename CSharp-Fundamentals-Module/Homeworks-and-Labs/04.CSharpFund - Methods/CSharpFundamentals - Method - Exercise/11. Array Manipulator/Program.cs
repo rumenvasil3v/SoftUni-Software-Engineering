@@ -44,7 +44,6 @@ namespace _11._Array_Manipulator
         static void Main(string[] args)
         {
             int[] initialArray = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-
             initialArray = ArrayManipulatorCommand(initialArray);
             Console.WriteLine($"[{string.Join(", ", initialArray)}]");
         }
@@ -68,12 +67,12 @@ namespace _11._Array_Manipulator
                         MinEvenOrOdd(initialArray, input);
                         break;
                     case "first":
-                        int firstCount = int.Parse(input.Split()[1]);
+                        uint firstCount = uint.Parse(input.Split()[1]);
 
                         FirstEvenOrOddElements(initialArray, firstCount, input);
                         break;
                     case "last":
-                        int lastCount = int.Parse(input.Split()[1]);
+                        uint lastCount = uint.Parse(input.Split()[1]);
 
                         LastEvenOrOddElements(initialArray, lastCount, input);
                         break;
@@ -85,7 +84,7 @@ namespace _11._Array_Manipulator
 
         static int[] ExchangeArrayIndex(int[] initialArray, int index)
         {
-            if (index > initialArray.Length - 1)
+            if (index > initialArray.Length - 1 || index < 0)
             {
                 Console.WriteLine("Invalid index");
                 return initialArray;
@@ -245,7 +244,7 @@ namespace _11._Array_Manipulator
             }
         }
 
-        static void FirstEvenOrOddElements(int[] initialArray, int firstCount, string input)
+        static void FirstEvenOrOddElements(int[] initialArray, uint firstCount, string input)
         {
             int evenIndex = 0;
             int oddIndex = 0;
@@ -277,7 +276,7 @@ namespace _11._Array_Manipulator
                     {
                         if (oddElements.Length > 0)
                         {
-                            if (firstCount <= oddElements.Length)
+                            if (firstCount < oddElements.Length)
                             {
                                 Console.Write("[");
                                 for (int n = 0; n < firstCount; n++)
@@ -311,7 +310,7 @@ namespace _11._Array_Manipulator
                     {
                         if (evenElements.Length > 0)
                         {
-                            if (firstCount <= evenElements.Length)
+                            if (firstCount < evenElements.Length)
                             {
                                 Console.Write("[");
                                 for (int n = 0; n < firstCount; n++)
@@ -339,9 +338,26 @@ namespace _11._Array_Manipulator
             }
         }
 
-        static void LastEvenOrOddElements(int[] initialArray, int lastCount, string input)
+        static void LastEvenOrOddElements(int[] initialArray, uint lastCount, string input)
         {
-            int count = 0;
+            int evenIndex = 0;
+            int oddIndex = 0;
+            int[] evenElements = new int[initialArray.Count(x => x % 2 == 0)];
+            int[] oddElements = new int[initialArray.Count(x => x % 2 == 1)];
+
+            for (int n = 0; n < initialArray.Length; n++)
+            {
+                if (initialArray[n] % 2 == 1)
+                {
+                    oddElements[oddIndex] = initialArray[n];
+                    oddIndex++;
+                }
+                else
+                {
+                    evenElements[evenIndex] = initialArray[n];
+                    evenIndex++;
+                }
+            }
 
             switch (input.Split()[2])
             {
@@ -354,12 +370,12 @@ namespace _11._Array_Manipulator
                     {
                         if (oddElements.Length > 0)
                         {
-                            if (lastCount <= oddElements.Length)
+                            if (lastCount < oddElements.Length)
                             {
                                 Console.Write("[");
-                                for (int n = oddElements.Length - 1; n >= oddElements.Length - lastCount; n++)
+                                for (int n = oddElements.Length - (int)lastCount; n < oddElements.Length; n++)
                                 {
-                                    if (n == oddElements.Length - lastCount)
+                                    if (n == oddElements.Length - 1)
                                     {
                                         Console.Write($"{oddElements[n]}");
                                         continue;
@@ -388,12 +404,12 @@ namespace _11._Array_Manipulator
                     {
                         if (evenElements.Length > 0)
                         {
-                            if (lastCount <= evenElements.Length)
+                            if (lastCount < evenElements.Length)
                             {
                                 Console.Write("[");
-                                for (int n = evenElements.Length - 1; n >= evenElements.Length - lastCount; n++)
+                                for (int n = evenElements.Length - (int)lastCount; n < evenElements.Length; n++)
                                 {
-                                    if (n == evenElements.Length - lastCount)
+                                    if (n == evenElements.Length - 1)
                                     {
                                         Console.Write($"{evenElements[n]}");
                                         continue;
