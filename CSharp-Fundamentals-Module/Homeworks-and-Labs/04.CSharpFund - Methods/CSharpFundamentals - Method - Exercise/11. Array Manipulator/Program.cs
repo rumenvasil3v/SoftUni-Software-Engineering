@@ -341,24 +341,7 @@ namespace _11._Array_Manipulator
 
         static void LastEvenOrOddElements(int[] initialArray, int lastCount, string input)
         {
-            int evenIndex = 0;
-            int oddIndex = 0;
-            int[] evenElements = new int[initialArray.Count(x => x % 2 == 0)];
-            int[] oddElements = new int[initialArray.Count(x => x % 2 == 1)];
-
-            for (int n = 0; n < initialArray.Length; n++)
-            {
-                if (initialArray[n] % 2 == 1)
-                {
-                    oddElements[oddIndex] = initialArray[n];
-                    oddIndex++;
-                }
-                else
-                {
-                    evenElements[evenIndex] = initialArray[n];
-                    evenIndex++;
-                }
-            }
+            int count = 0;
 
             switch (input.Split()[2])
             {
