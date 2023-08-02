@@ -6,7 +6,7 @@ namespace _09._Pokemon_Don_t_Go
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
