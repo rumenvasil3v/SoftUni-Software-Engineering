@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01. Encrypt, Sort and Print
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demo", "demo\demo.csproj", "{954AA70D-E66A-4B93-A3B9-3A8DF18D6F4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Pascal Triangle", "02. Pascal Triangle\02. Pascal Triangle.csproj", "{2E9EC66B-268A-4976-96B2-E3AF5576D99B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02. Pascal Triangle", "02. Pascal Triangle\02. Pascal Triangle.csproj", "{2E9EC66B-268A-4976-96B2-E3AF5576D99B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
