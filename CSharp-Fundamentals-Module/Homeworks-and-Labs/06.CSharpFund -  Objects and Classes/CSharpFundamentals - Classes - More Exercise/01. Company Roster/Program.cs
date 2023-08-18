@@ -1,59 +1,84 @@
-﻿namespace _01._Company_Roster
+﻿using System.Data.Common;
+
+namespace _01._Company_Roster
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int numberOfLines = int.Parse(Console.ReadLine());
-            List<Employee> employees = new List<Employee>();
 
-            decimal highestAverageSalary = 0;
+            Dictionary<string, List<Employee>> departments = new Dictionary<string, List<Employee>>();
 
-            for (int e = 0; e < numberOfLines; e++)
+            int count = 1;
+            int numberOfEmployees = int.Parse(Console.ReadLine());
+
+            for (int n = 0; n < numberOfEmployees; n++)
             {
-                string[] arguments = Console
-                    .ReadLine()
-                    .Split(' ');
+                string[] dataForEmployee = Console.ReadLine().Split();
 
-                string employeeName = arguments[0];
-                decimal employeeSalary = decimal.Parse(arguments[1]);
-                string employeeDepartment = arguments[2];
+                string employeeName = dataForEmployee[0];
+                decimal employeeSalary = decimal.Parse(dataForEmployee[1]);
+                string departmentName = dataForEmployee[2];
 
-                Employee employee = new Employee(employeeName, employeeSalary, employeeDepartment);
+                Employee employee = new Employee(employeeName, employeeSalary, departmentName);
 
-                var sameDep = employees.FirstOrDefault(x => x.Department == employee.Department);  
+                if (!departments.ContainsKey(departmentName))
+                {
+                    List<Employee> currentEmployee = new List<Employee>();
 
-                employees.Add(employee);
+                    currentEmployee.Add(employee);
+                    departments.Add(departmentName, new List<Employee>(currentEmployee));
+                    continue;
+                }
+
+                departments[departmentName].Add(employee);
             }
 
-            foreach (var employee in employees.Where(x => x.Salary))
-            {
+            decimal maxAverageSalary = 0;
+            List<Employee> highestAverageSalary = new List<Employee>();
 
+            string highestAverageSalaryDepartmentName = string.Empty;
+
+            foreach (var kvp in departments)
+            {
+                decimal currentAverageSalary = kvp.Value.Average(x => x.Salary);
+
+                if (currentAverageSalary > maxAverageSalary)
+                {
+                    maxAverageSalary = currentAverageSalary;
+                    highestAverageSalary = new List<Employee>();
+
+                    foreach (var val in kvp.Value)
+                    {
+                        highestAverageSalary.Add(val);
+                    }
+                    highestAverageSalaryDepartmentName = kvp.Key;
+                }
+            }
+
+            Console.WriteLine($"Highest Average Salary: {highestAverageSalaryDepartmentName}");
+
+            foreach (var val in highestAverageSalary.OrderByDescending(x => x.Salary))
+            {
+                Console.WriteLine($"{val.Name} {val.Salary:F2}");
             }
         }
     }
 
     public class Employee
     {
-
-        public Employee(string name, decimal salary, string department)
+        public Employee(string employeeName, decimal employeeSalary, string departmentName)
         {
-            Name = name;
-            Salary = salary;
-            Department = department;
+            Name = employeeName;
+            Salary = employeeSalary;
+            DepartmentName = departmentName;
         }
 
         public string Name { get; set; }
 
         public decimal Salary { get; set; }
 
-        public string Department { get; set; }
+        public string DepartmentName { get; set; }
 
-        public override string ToString()
-        {
-
-
-            return string.Empty;
-        }
     }
 }

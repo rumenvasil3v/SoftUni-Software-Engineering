@@ -3,12 +3,39 @@ using System.Linq;
 using System.Security.Cryptography;
 
 /*
- 1 10 100 1000
+1 10 100 1000
 exchange 3
 first 2 odd
 last 4 odd
 end
 
+2 3 3 3 5 7 9 2
+exchange 1
+min odd
+min even
+first 2 odd
+last 2 even
+exchange 3
+end
+
+1 3 5 7 9
+exchange 1
+max odd
+min even
+first 2 odd
+last 2 even
+exchange 3
+end
+
+1 10 100 1000
+max even
+first 5 even
+exchange 10
+min odd
+exchange 0
+max even
+min even
+end
  */
 namespace _11._Array_Manipulator
 {
@@ -16,410 +43,401 @@ namespace _11._Array_Manipulator
     {
         static void Main(string[] args)
         {
-            int[] initialArrays = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
-
-            string input = Console.ReadLine();
-            ArrayManipulatorCommand(input, initialArrays);
+            Console.Write("Read an input[array of integers]: ");
+            int[] initialArray = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+            initialArray = ArrayManipulatorCommand(initialArray);
+            Console.WriteLine($"[{string.Join(", ", initialArray)}]");
         }
 
-        static void ArrayManipulatorCommand(string input, int[] initialArrays)
+        static int[] ArrayManipulatorCommand(int[] initialArray)
         {
-            int[] exchangedArray = new int[initialArrays.Length];
-            exchangedArray = initialArrays;
+            Console.WriteLine("Choose one of the following commands to manipulate the array:");
+            Console.WriteLine(" -exchange {(int)index};");
+            Console.WriteLine(" -max even/odd;");
+            Console.WriteLine(" -min even/odd;");
+            Console.WriteLine(" -first {(int)count} even/odd;");
+            Console.WriteLine(" -last {(int)count} even/odd.");
 
-            while (input != "end")
+            string input;
+            while ((input = Console.ReadLine()) != "end")
             {
-                string[] items = input.Split(' ');
-                bool isValid = int.TryParse(items[1], out int index);
-                isValid = int.TryParse(items[1], out int count);
+                switch (input.Split()[0])
+                {
+                    case "exchange":
+                        int index = int.Parse(input.Split()[1]);
 
-                if (input == "max odd" || input == "max even")
-                {
-                    MaxEvenOrOdd(exchangedArray, input);
-                }
-                else if (input == "min odd" || input == "min even")
-                {
-                    MinEvenOrOdd(exchangedArray, input);
-                }
-                else if (input == $"first {count} even" || input == $"first {count} odd")
-                {
-                    FirstCountEvenOrOdd(exchangedArray, count, input);
-                }
-                else if (input == $"last {count} even" || input == $"last {count} odd")
-                {
-                    LastCountEvenOrOdd(exchangedArray, count, input);
-                }
-                else if (input == $"exchange {index}")
-                {
-                    exchangedArray = ExchangeArrayIndex(exchangedArray, input, index);
-                }
+                        initialArray = ExchangeArrayIndex(initialArray, index);
+                        break;
+                    case "max":
+                        MaxEvenOrOdd(initialArray, input);
+                        break;
+                    case "min":
+                        MinEvenOrOdd(initialArray, input);
+                        break;
+                    case "first":
+                        uint firstCount = uint.Parse(input.Split()[1]);
 
-                input = Console.ReadLine();
+                        FirstEvenOrOddElements(initialArray, firstCount, input);
+                        break;
+                    case "last":
+                        uint lastCount = uint.Parse(input.Split()[1]);
+
+                        LastEvenOrOddElements(initialArray, lastCount, input);
+                        break;
+                }
             }
 
-            if (input == "end")
-            {
-                FinalResult(exchangedArray);
-            }
+            return initialArray;
         }
 
-        static int[] ExchangeArrayIndex(int[] exchangedArray, string input, int index)
+        static int[] ExchangeArrayIndex(int[] initialArray, int index)
         {
-            if (index > exchangedArray.Length - 1)
+            if (index > initialArray.Length - 1 || index < 0)
             {
                 Console.WriteLine("Invalid index");
-                return exchangedArray;
+                return initialArray;
             }
 
-            int mid = index + 1;
+            int[] firstHalf = initialArray.Take(index + 1).ToArray();
+            int[] secondHalf = initialArray.Skip(index + 1).ToArray();
 
-            int[] firstHalf = exchangedArray.Take(mid).ToArray();
-            int[] secondHalf = exchangedArray.Skip(mid).ToArray();
+            initialArray = secondHalf.Concat(firstHalf).ToArray();
 
-            exchangedArray = secondHalf.Concat(firstHalf).ToArray();
-
-            return exchangedArray;
+            return initialArray;
         }
 
-        static void MaxEvenOrOdd(int[] exchangedArray, string input)
+        static void MaxEvenOrOdd(int[] initialArray, string input)
         {
-            int maxEven = 0;
-            int currentEven = 0;
-            int maxOdd = 0;
-            int currentOdd = 0;
-            bool isFound = false;
+            int maxIndex = 0;
 
-            if (input == "max even")
+            switch (input.Split()[1])
             {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
-                    if (exchangedArray[i] % 2 == 0)
+                case "odd":
+                    maxIndex = initialArray.Count(x => x % 2 == 1);
+                    if (maxIndex > 0)
                     {
-                        isFound = true;
-
-                        if (exchangedArray[i] == currentEven)
+                        int maxOdd = 0;
+                        int oddIndex = 0;
+                        for (int n = 0; n < initialArray.Length; n++)
                         {
-                            maxEven = i;
+                            if (initialArray[n] % 2 == 1)
+                            {
+                                if (initialArray[n] > maxOdd)
+                                {
+                                    maxOdd = initialArray[n];
+                                    oddIndex = n;
+                                    continue;
+                                }
+
+                                if (maxOdd == initialArray[n])
+                                {
+                                    oddIndex = n;
+                                    continue;
+                                }
+                            }
                         }
 
-                        if (exchangedArray[i] > currentEven)
-                        {
-                            currentEven = exchangedArray[i];
-                            maxEven = i;
-                        }
+                        Console.WriteLine(oddIndex);
                     }
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine(maxEven);
-                }
-                else
-                {
-                    Console.WriteLine("No matches");
-                }
-            }
-            else if (input == "max odd")
-            {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
-                    if (exchangedArray[i] % 2 == 1)
+                    else
                     {
-                        isFound = true;
-
-                        if (exchangedArray[i] == currentOdd)
-                        {
-                            maxOdd = i;
-                        }
-
-                        if (exchangedArray[i] > currentOdd)
-                        {
-                            currentOdd = exchangedArray[i];
-                            maxOdd = i;
-                        }
+                        Console.WriteLine("No matches");
                     }
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine(maxOdd);
-                }
-                else
-                {
-                    Console.WriteLine("No matches");
-                }
-            }
-        }
-
-        static void MinEvenOrOdd(int[] exchangedArray, string input)
-        {
-            int minEven = 0;
-            int currentEven = int.MaxValue;
-            int minOdd = 0;
-            int currentOdd = int.MaxValue;
-            bool isFound = false;
-
-            if (input == "min even")
-            {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
-                    if (exchangedArray[i] % 2 == 0)
+                    break;
+                case "even":
+                    maxIndex = initialArray.Count(x => x % 2 == 0);
+                    if (maxIndex > 0)
                     {
-                        isFound = true;
-
-                        if (exchangedArray[i] == currentEven)
+                        int maxEven = 0;
+                        int evenIndex = 0;
+                        for (int n = 0; n < initialArray.Length; n++)
                         {
-                            minEven = i;
+                            if (initialArray[n] % 2 == 0)
+                            {
+                                if (initialArray[n] > maxEven)
+                                {
+                                    maxEven = initialArray[n];
+                                    evenIndex = n;
+                                    continue;
+                                }
+
+                                if (maxEven == initialArray[n])
+                                {
+                                    evenIndex = n;
+                                    continue;
+                                }
+                            }
                         }
 
-                        if (currentEven > exchangedArray[i])
-                        {
-                            currentEven = exchangedArray[i];
-                            minEven = i;
-                        }
+                        Console.WriteLine(evenIndex);
                     }
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine(minEven);
-                }
-                else
-                {
-                    Console.WriteLine("No matches");
-                }
-            }
-            else if (input == "min odd")
-            {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
-                    if (exchangedArray[i] % 2 == 1)
+                    else
                     {
-                        isFound = true;
-
-                        if (exchangedArray[i] == currentOdd)
-                        {
-                            minOdd = i;
-                        }
-
-                        if (currentOdd > exchangedArray[i])
-                        {
-                            currentOdd = exchangedArray[i];
-                            minOdd = i;
-                        }
+                        Console.WriteLine("No matches");
                     }
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine(minOdd);
-                }
-                else
-                {
-                    Console.WriteLine("No matches");
-                }
+                    break;
             }
         }
 
-        static void FirstCountEvenOrOdd(int[] exchangedArray, int count, string input)
+        static void MinEvenOrOdd(int[] initialArray, string input)
         {
-            string[] firstEvenElements = new string[count];
-            string[] firstOddElements = new string[count];
-            int currentEvenCount = 0;
-            int currentOddCount = 0;
-            bool isFound = false;
+            int minIndex = 0;
 
-            if (input == $"first {count} even")
+            switch (input.Split()[1])
             {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
+                case "odd":
+                    int minOdd = int.MaxValue;
+                    int oddIndex = 0;
+                    minIndex = initialArray.Count(x => x % 2 == 1);
+                    if (minIndex > 0)
+                    {
+                        for (int n = 0; n < initialArray.Length; n++)
+                        {
+                            if (initialArray[n] % 2 == 1)
+                            {
+                                if (initialArray[n] < minOdd)
+                                {
+                                    minOdd = initialArray[n];
+                                    oddIndex = n;
+                                    continue;
+                                }
 
-                    if (count > exchangedArray.Length)
+                                if (initialArray[n] == minOdd)
+                                {
+                                    oddIndex = n;
+                                    continue;
+                                }
+                            }
+                        }
+
+                        Console.WriteLine(oddIndex);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No matches");
+                    }
+                    break;
+                case "even":
+                    int minEven = int.MaxValue;
+                    int evenIndex = 0;
+                    minIndex = initialArray.Count(x => x % 2 == 0);
+                    if (minIndex > 0)
+                    {
+                        for (int n = 0; n < initialArray.Length; n++)
+                        {
+                            if (initialArray[n] % 2 == 0)
+                            {
+                                if (initialArray[n] < minEven)
+                                {
+                                    minEven = initialArray[n];
+                                    evenIndex = n;
+                                    continue;
+                                }
+
+                                if (initialArray[n] == minEven)
+                                {
+                                    evenIndex = n;
+                                    continue;
+                                }
+                            }
+                        }
+
+                        Console.WriteLine(evenIndex);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No matches");
+                    }
+                    break;
+            }
+        }
+
+        static void FirstEvenOrOddElements(int[] initialArray, uint firstCount, string input)
+        {
+            int evenIndex = 0;
+            int oddIndex = 0;
+            int[] evenElements = new int[initialArray.Count(x => x % 2 == 0)];
+            int[] oddElements = new int[initialArray.Count(x => x % 2 == 1)];
+
+            for (int n = 0; n < initialArray.Length; n++)
+            {
+                if (initialArray[n] % 2 == 1)
+                {
+                    oddElements[oddIndex] = initialArray[n];
+                    oddIndex++;
+                }
+                else
+                {
+                    evenElements[evenIndex] = initialArray[n];
+                    evenIndex++;
+                }
+            }
+
+            switch (input.Split()[2])
+            {
+                case "odd":
+                    if (firstCount > initialArray.Length)
                     {
                         Console.WriteLine("Invalid count");
-                        return;
                     }
-
-                    if (exchangedArray[i] % 2 == 0)
+                    else
                     {
-                        isFound = true;
-
-                        currentEvenCount++;
-                        firstEvenElements[i] += exchangedArray[i];
-
-                        if (currentEvenCount == count)
+                        if (oddElements.Length > 0)
                         {
-                            break;
+                            if (firstCount < oddElements.Length)
+                            {
+                                Console.Write("[");
+                                for (int n = 0; n < firstCount; n++)
+                                {
+                                    if (n == firstCount - 1)
+                                    {
+                                        Console.Write($"{oddElements[n]}");
+                                        continue;
+                                    }
+                                    Console.Write($"{oddElements[n]}, ");
+                                }
+                                Console.WriteLine("]");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[{string.Join(", ", oddElements)}]");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("[]");
                         }
                     }
-                }
-
-                if (currentEvenCount == 1)
-                {
-                    Console.WriteLine($"[{string.Join(", ", firstEvenElements.Length - 1)}]");
-                    return;
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine($"[{string.Join(", ", firstEvenElements)}]");
-                }
-                else
-                {
-                    Console.WriteLine("[]");
-                }
-            }
-            else if (input == $"first {count} odd")
-            {
-                for (int i = 0; i < exchangedArray.Length; i++)
-                {
-
-                    if (count > exchangedArray.Length)
+                    break;
+                case "even":
+                    if (firstCount > initialArray.Length)
                     {
                         Console.WriteLine("Invalid count");
-                        return;
                     }
-
-                    if (exchangedArray[i] % 2 == 1)
+                    else
                     {
-                        isFound = true;
-
-                        currentOddCount++;
-                        firstOddElements[i] += exchangedArray[i];
-
-                        if (currentOddCount == count)
+                        if (evenElements.Length > 0)
                         {
-                            break;
+                            if (firstCount < evenElements.Length)
+                            {
+                                Console.Write("[");
+                                for (int n = 0; n < firstCount; n++)
+                                {
+                                    if (n == firstCount - 1)
+                                    {
+                                        Console.Write($"{evenElements[n]}");
+                                        continue;
+                                    }
+                                    Console.Write($"{evenElements[n]}, ");
+                                }
+                                Console.WriteLine("]");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[{string.Join(", ", evenElements)}]");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("[]");
                         }
                     }
-                }
-
-                if (currentOddCount == 1)
-                {
-                    Console.WriteLine($"[{string.Join(", ", firstOddElements.Length - 1)}]");
-                    return;
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine($"[{string.Join(", ", firstOddElements.Length )}]");
-                }
-                else
-                {
-                    Console.WriteLine("[]");
-                }
+                    break;
             }
         }
 
-        static void LastCountEvenOrOdd(int[] exchangedArray, int count, string input)
+        static void LastEvenOrOddElements(int[] initialArray, uint lastCount, string input)
         {
-            string[] lastEvenElements = new string[count];
-            string[] lastOddElements = new string[count];
-            int currentEvenElements = 0;
-            int currentOddElements = 0;
-            bool isFound = false;
+            int evenIndex = 0;
+            int oddIndex = 0;
+            int[] evenElements = new int[initialArray.Count(x => x % 2 == 0)];
+            int[] oddElements = new int[initialArray.Count(x => x % 2 == 1)];
 
-            if (input == $"last {count} even")
+            for (int n = 0; n < initialArray.Length; n++)
             {
-
-                for (int i = exchangedArray.Length - 1; i >= 0; i--)
+                if (initialArray[n] % 2 == 1)
                 {
+                    oddElements[oddIndex] = initialArray[n];
+                    oddIndex++;
+                }
+                else
+                {
+                    evenElements[evenIndex] = initialArray[n];
+                    evenIndex++;
+                }
+            }
 
-                    if (count > exchangedArray.Length)
+            switch (input.Split()[2])
+            {
+                case "odd":
+                    if (lastCount > initialArray.Length)
                     {
                         Console.WriteLine("Invalid count");
-                        return;
                     }
-
-                    if (exchangedArray[i] % 2 == 0)
+                    else
                     {
-                        isFound = true;
-
-                        currentEvenElements++;
-                        lastEvenElements[i] += exchangedArray[i];
-
-                        if (currentEvenElements == count)
+                        if (oddElements.Length > 0)
                         {
-                            break;
+                            if (lastCount < oddElements.Length)
+                            {
+                                Console.Write("[");
+                                for (int n = oddElements.Length - (int)lastCount; n < oddElements.Length; n++)
+                                {
+                                    if (n == oddElements.Length - 1)
+                                    {
+                                        Console.Write($"{oddElements[n]}");
+                                        continue;
+                                    }
+                                    Console.Write($"{oddElements[n]}, ");
+                                }
+                                Console.WriteLine("]");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[{string.Join(", ", oddElements)}]");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("[]");
                         }
                     }
-                }
-
-                if (currentEvenElements == 1)
-                {
-                    Console.WriteLine($"[{string.Join(", ", lastEvenElements.Length - 1)}]");
-                    return;
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine($"[{string.Join(", ", lastEvenElements)}]");
-                }
-                else
-                {
-                    Console.WriteLine("[]");
-                }
-            }
-            else if (input == $"last {count} odd")
-            {
-
-                for (int i = exchangedArray.Length - 1; i >= 0; i--)
-                {
-
-                    if (count > exchangedArray.Length)
+                    break;
+                case "even":
+                    if (lastCount > initialArray.Length)
                     {
                         Console.WriteLine("Invalid count");
-                        return;
                     }
-
-                    if (exchangedArray[i] % 2 == 1)
+                    else
                     {
-                        isFound = true;
-
-                        currentOddElements++;
-                        lastOddElements[i] += exchangedArray[i];
-
-                        if (currentOddElements == count)
+                        if (evenElements.Length > 0)
                         {
-                            break;
+                            if (lastCount < evenElements.Length)
+                            {
+                                Console.Write("[");
+                                for (int n = evenElements.Length - (int)lastCount; n < evenElements.Length; n++)
+                                {
+                                    if (n == evenElements.Length - 1)
+                                    {
+                                        Console.Write($"{evenElements[n]}");
+                                        continue;
+                                    }
+                                    Console.Write($"{evenElements[n]}, ");
+                                }
+                                Console.WriteLine("]");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"[{string.Join(", ", evenElements)}]");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("[]");
                         }
                     }
-                }
-
-                if (currentOddElements == 1)
-                {
-                    Console.WriteLine($"[{string.Join(", ", lastOddElements.Length - 1)}]");
-                    return;
-                }
-
-                if (isFound)
-                {
-                    Console.WriteLine($"[{string.Join(", ", lastOddElements)}]");
-                }
-                else
-                {
-                    Console.WriteLine("[]");
-                }
+                    break;
             }
-        }
-
-        static void FinalResult(int[] exchangedArray)
-        {
-            string[] finalState = new string[exchangedArray.Length];
-
-            for (int i = 0; i < exchangedArray.Length; i++)
-            {
-                if (i == exchangedArray.Length - 1)
-                {
-                    finalState[i] += exchangedArray[i];
-                }
-                else
-                {
-                    finalState[i] += exchangedArray[i];
-                }
-            }
-
-            Console.WriteLine($"[{string.Join(", ", finalState)}]");
         }
     }
 }

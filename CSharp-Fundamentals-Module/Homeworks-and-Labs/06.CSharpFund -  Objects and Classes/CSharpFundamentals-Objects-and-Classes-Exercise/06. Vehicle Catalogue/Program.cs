@@ -48,19 +48,13 @@ namespace _06._Vehicle_Catalogue
 
                 string typeVehicle = argumnents[0];
 
-                if (typeVehicle != "truck" && typeVehicle != "car")
-                {
-                    continue;
-                }
+                
 
                 string model = argumnents[1];
                 string color = argumnents[2];
                 int horsepower = int.Parse(argumnents[3]);
 
-                if (horsepower > 1000)
-                {
-                    continue;
-                }
+               
 
                 Vehicle v = vehicles.FirstOrDefault(m => m.Model == model);
                 if (v != null)

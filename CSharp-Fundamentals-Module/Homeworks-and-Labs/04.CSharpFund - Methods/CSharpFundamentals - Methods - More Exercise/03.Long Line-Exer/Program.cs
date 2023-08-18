@@ -1,17 +1,4 @@
-﻿using System;
-
-/*
-2
-3
--2
--3
-2
--3
--2
-3
-
- */
-namespace _02._Center_Point
+﻿namespace _03.Long_Line_Exer
 {
     internal class Program
     {
@@ -27,6 +14,8 @@ namespace _02._Center_Point
 
             double secondPoint = Math.Abs(x2) + Math.Abs(y2);
 
+            double firstLine = firstPoint + secondPoint;
+
             double x3 = double.Parse(Console.ReadLine());
             double y3 = double.Parse(Console.ReadLine());
 
@@ -37,16 +26,14 @@ namespace _02._Center_Point
 
             double fourthPoint = Math.Abs(x4) + Math.Abs(y4);
 
-            double firstPair = firstPoint + secondPoint;
-            double secondPair = thirdPoint + fourthPoint;
+            double secondLine = thirdPoint + fourthPoint;
 
-            LongerLine(firstPair, secondPair, firstPoint, secondPoint, thirdPoint, fourthPoint, x1, y1, x2, y2, x3, y3, x4, y4);
-            SameLines(firstPair, secondPair, firstPoint, secondPoint, thirdPoint, fourthPoint, x1, y1, x2, y2);
+            LongerLine(firstLine, secondLine, firstPoint, secondPoint, thirdPoint, fourthPoint, x1, y1, x2, y2, x3, y3, x4, y4);
         }
 
-        static void LongerLine(double firstPair, double secondPair, double firstPoint, double secondPoint, double thirdPoint, double fourthPoint, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+        static void LongerLine(double firstLine, double secondLine, double firstPoint, double secondPoint, double thirdPoint, double fourthPoint, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
         {
-            if (firstPair > secondPair)
+            if (firstLine > secondLine)
             {
                 if (firstPoint > secondPoint)
                 {
@@ -57,7 +44,7 @@ namespace _02._Center_Point
                     Console.WriteLine("({0}, {1})({2}, {3})", x1, y1, x2, y2);
                 }
             }
-            else if (secondPair > firstPair)
+            else
             {
                 if (thirdPoint > fourthPoint)
                 {
@@ -66,22 +53,6 @@ namespace _02._Center_Point
                 else
                 {
                     Console.WriteLine("({0}, {1})({2}, {3})", x3, y3, x4, y4);
-                }
-            }
-
-        }
-
-        static void SameLines(double firstPair, double secondPair, double firstPoint, double secondPoint, double thirdPoint, double fourthPoint, double x1, double y1, double x2, double y2)
-        {
-            if (firstPair == secondPair)
-            {
-                if (firstPoint > secondPoint)
-                {
-                    Console.WriteLine("({0}, {1})({2}, {3})", x2, y2, x1, y1);
-                }
-                else
-                {
-                    Console.WriteLine("({0}, {1})({2}, {3})", x1, y1, x2, y2);
                 }
             }
         }
